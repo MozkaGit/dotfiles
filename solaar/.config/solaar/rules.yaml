@@ -1,0 +1,15 @@
+%YAML 1.3
+---
+- Rule:
+  - Active: 2BFF0C23
+  - Test: [thumb_wheel_up, 15]
+  - KeyPress:
+    - XF86_AudioRaiseVolume
+    - click
+- Rule:
+  - Active: 2BFF0C23
+  - Test: [thumb_wheel_down, 15]
+  - KeyPress:
+    - XF86_AudioLowerVolume
+    - click
+...
