@@ -1,0 +1,1 @@
+/home/mozka/.asdf/completions/asdf.fish
