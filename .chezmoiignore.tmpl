@@ -1,0 +1,9 @@
+setup
+
+{{ if env "DEVPOD" | eq "true" }}
+# Specific configuration to DevContainer
+# These files will not be included in a DevPod environnement
+.config/ghostty
+.config/solaar
+.wezterm.lua
+{{ end }}
