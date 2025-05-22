@@ -1,0 +1,11 @@
+[tools]
+bat = "latest"
+chezmoi = "latest"
+ripgrep = "latest"
+neovim = "0.11.1"
+node = "latest"
+op = "latest"
+starship = "latest"
+lazygit = "latest"
+fd = "latest"
+usage = "latest"

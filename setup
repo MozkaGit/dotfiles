@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if command -v fish >/dev/null; then
+	sudo chsh -s $(command -v fish) $USER
+fi
+
+if ! command -v chezmoi >/dev/null; then
+	sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:MozkaGit/dotfiles.git
+fi
+
+# Installing Nushell
+curl -fsSL https://apt.fury.io/nushell/gpg.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/fury-nushell.gpg
+echo "deb https://apt.fury.io/nushell/ /" | sudo tee /etc/apt/sources.list.d/fury.list
+sudo apt-get update
+sudo apt-get install nushell -y
+
+# Installing Vim and TMUX
+sudo apt-get install vim tmux -y
+
+exit 0
