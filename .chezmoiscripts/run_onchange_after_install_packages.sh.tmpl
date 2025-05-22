@@ -4,5 +4,6 @@
 $HOME/.local/bin/mise trust $HOME/.config/mise/config.toml && $HOME/.local/bin/mise install
 {{- else }}
 echo "Skipping mise installations - not in DevPod environment"
+exit 0
 {{- end }}
 
