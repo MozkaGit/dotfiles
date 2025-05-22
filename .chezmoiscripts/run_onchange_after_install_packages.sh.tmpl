@@ -1,6 +1,8 @@
-{{ if (env "DEVPOD") }}
 #!/bin/bash
+{{- if (env "DEVPOD") }}
 # packages hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
 $HOME/.local/bin/mise trust $HOME/.config/mise/config.toml && $HOME/.local/bin/mise install
-{{ end }}
+{{- else }}
+echo "Skipping mise installations - not in DevPod environment"
+{{- end }}
 
