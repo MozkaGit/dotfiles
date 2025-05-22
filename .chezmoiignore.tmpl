@@ -8,3 +8,10 @@ README.md
 .config/solaar
 .wezterm.lua
 {{ end }}
+
+{{ if eq (default "false" (env "DEVPOD")) "false" }}
+# Specific configuration to DevContainer
+# These files will not be included in a DevPod environnement
+.config/mise
+.config/mise/config.toml
+{{ end }}
