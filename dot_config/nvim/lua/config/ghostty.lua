@@ -4,7 +4,13 @@
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	callback = function()
 		local filepath = vim.fn.expand("%:p")
-		if filepath:match("ghostty/config") or filepath:match("%.ghostty$") then
+		local filename = vim.fn.expand("%:t")
+
+		-- Debug: print the filepath
+		if filename == "config" and filepath:match("ghostty") then
+			print("Detected ghostty config at: " .. filepath)
+			vim.bo.filetype = "ghostty"
+		elseif filepath:match("%.ghostty$") then
 			vim.bo.filetype = "ghostty"
 		end
 	end,
