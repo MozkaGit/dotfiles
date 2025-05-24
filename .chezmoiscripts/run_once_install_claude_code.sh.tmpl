@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+{{ if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "debian") }}
+npm install -g @anthropic-ai/claude-code
+{{ end }}
