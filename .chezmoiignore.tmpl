@@ -1,7 +1,7 @@
 setup
 README.md
 
-{{ if env "DEVPOD" | eq "true" }}
+{{ if env "DEVPOD" }}
 # Specific configuration to DevContainer
 # These files will not be included in a DevPod environnement
 .config/ghostty
@@ -9,9 +9,9 @@ README.md
 .wezterm.lua
 {{ end }}
 
-{{ if eq (default "false" (env "DEVPOD")) "false" }}
-# Specific configuration to DevContainer
-# These files will not be included in a DevPod environnement
+{{ if not (env "DEVPOD") }}
+# Specific configuration to non-DevContainer environnement
+# These files will not be included in a non-DevPod environnement
 .config/mise
 .config/mise/config.toml
 {{ end }}
