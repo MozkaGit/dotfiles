@@ -11,8 +11,8 @@ if os.getenv("SSH_TTY") or os.getenv("DEVPOD") then
       ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
     },
     paste = {
-      ["+"] = function() return vim.fn.getreg('"') end,
-      ["*"] = function() return vim.fn.getreg('"') end,
+      ["+"] = function() return vim.fn.getreg('"', 1, true) end,
+      ["*"] = function() return vim.fn.getreg('"', 1, true) end,
     },
   }
 end
