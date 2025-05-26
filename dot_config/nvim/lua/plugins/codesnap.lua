@@ -4,9 +4,10 @@ return {
 		"make build_generator",
 	},
 	keys = {
-		{ "<leader>vc", "<cmd>CodeSnap<cr>", mode = "x", desc = "Save selected code snapshot into clipboard" },
-		{ "<leader>vf", "<cmd>CodeSnapSave<cr>", mode = "x", desc = "Save selected code snapshot into a file" },
-		{ "<leader>va", "<cmd>CodeSnapASCII<cr>", mode = "x", desc = "Save selected code snapshot in ascii" },
+		{ "<leader>v", group = " CodeSnap", mode = "x", desc = " CodeSnap" },
+		{ "<leader>vc", "<cmd>CodeSnap<cr>", mode = "x", desc = " Save selected code snapshot into clipboard" },
+		{ "<leader>vf", "<cmd>CodeSnapSave<cr>", mode = "x", desc = " Save selected code snapshot into a file" },
+		{ "<leader>va", "<cmd>CodeSnapASCII<cr>", mode = "x", desc = " Save selected code snapshot in ascii" },
 	},
 	config = function()
 		require("codesnap").setup({
