@@ -8,6 +8,7 @@ set -gx LANG en_US.UTF-8
 # Activate mise if installed
 if command -q mise
     mise activate fish | source
+    set -gx MISE_GITHUB_TOKEN "{{ onepasswordRead "op://DevOps/hjjxlhehpsy6zt77dmk5dfkmbm/token" }}"
 end
 
 # Initialize starship prompt if installed
@@ -44,5 +45,5 @@ set -gx TERM xterm-256color
 
 # Set 1Password ssh agent if the socket exists
 if test -e ~/.1password/agent.sock
-    set -gx SSH_AUTH_SOCK ~/.1password/agent.sock
+    set -gx SSH_AUTH_SOCK "~/.1password/agent.sock"
 end
