@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 {{ if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "debian") }}
-if [[ -f "$HOME/.local/share/mise/installs/node/24.1.0/bin/npm" ]]; then
-    echo "NPM binary found. Applying additionnal verifications..."
-    if command -v "$HOME/.local/share/mise/installs/node/24.1.0/bin/npm" >/dev/null; then
-        if ! test -x "$HOME/.local/share/mise/installs/node/24.1.0/bin/npm"; then
+NODE_PATH="$HOME/.local/share/mise/installs/node/24.1.0/bin"
+if [[ -f "$NODE_PATH/npm" ]]; then
+    echo "NPM binary found. Applying additional verifications..."
+    if command -v "$NODE_PATH/npm" >/dev/null; then
+        if ! test -x "$NODE_PATH/npm"; then
             echo "NPM is not executable, applying correct permissions..."
-            chmod +x "$HOME/.local/share/mise/installs/node/24.1.0/bin/npm"
+            chmod +x "$NODE_PATH/npm"
             echo "NPM is now executable."
         fi
         echo "Verifications done. Claude Code installation attempts..."
-        "$HOME/.local/share/mise/installs/node/24.1.0/bin/npm" install -g @anthropic-ai/claude-code
+        # Ajouter le répertoire node au PATH temporairement
+        PATH="$NODE_PATH:$PATH" "$NODE_PATH/npm" install -g @anthropic-ai/claude-code
         echo "Claude Code installation successful."
     else
         echo "Can't install Claude Code because NPM is not installed."
