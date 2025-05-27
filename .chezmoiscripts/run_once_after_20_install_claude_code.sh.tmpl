@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 {{ if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "debian") }}
+whoami
 if command -v npm >/dev/null; then
   npm install -g @anthropic-ai/claude-code
 else
-  echo "npm is not installed"
+  echo "Can't install Claude Code because npm is not installed"
 fi
 {{ end }}
