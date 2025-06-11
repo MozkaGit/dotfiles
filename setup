@@ -7,7 +7,7 @@ if command -v fish >/dev/null; then
 fi
 
 if ! command -v chezmoi >/dev/null; then
-	sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:MozkaGit/dotfiles.git
+	sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply https://github.com/MozkaGit/dotfiles.git
 fi
 
 # Installing Nushell
