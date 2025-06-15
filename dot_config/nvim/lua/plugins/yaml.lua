@@ -20,7 +20,11 @@ return {
 						yaml = {
 							keyOrdering = false,
 							schemas = {
-								kubernetes = "/*.yaml",
+								kubernetes = "**/*.yaml",
+								["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+								["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+								["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+								["https://json.schemastore.org/gitlab-ci"] = "*gitlab-ci*.{yml,yaml}",
 							},
 							format = {
 								enable = true,
