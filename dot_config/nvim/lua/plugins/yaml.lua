@@ -1,3 +1,23 @@
+local function setup_yaml_buffer()
+	-- Basic Settings
+	vim.opt_local.cursorcolumn = true
+	vim.opt_local.shiftwidth = 2
+	vim.opt_local.softtabstop = 2
+	vim.opt_local.tabstop = 2
+	vim.opt_local.expandtab = true
+
+	-- -- Keymap for yamllint
+	-- vim.keymap.set("n", "<leader>yl", function()
+	-- 	vim.cmd("cexpr system('yamllint " .. vim.fn.expand("%") .. "')")
+	-- 	vim.cmd("copen")
+	-- end, {
+	-- 	noremap = true,
+	-- 	silent = true,
+	-- 	buffer = 0,
+	-- 	desc = "Run yamllint",
+	-- })
+end
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -19,15 +39,24 @@ return {
 						redhat = { telemetry = { enabled = false } },
 						yaml = {
 							keyOrdering = false,
+							completion = true,
+							hover = true,
+							suggest = {
+								parentSkeletonSelectedFirst = false,
+							},
 							schemas = {
 								kubernetes = "**/*.yaml",
-								["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
-								["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
-								["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+								["https://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+								["https://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+								["https://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+								["https://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
 								["https://json.schemastore.org/gitlab-ci"] = "*gitlab-ci*.{yml,yaml}",
+								["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*compose*.{yml,yaml}",
 							},
 							format = {
 								enable = true,
+								singleQuote = false,
+								bracketSpacing = true,
 							},
 							validate = true,
 							schemaStore = {
@@ -41,16 +70,58 @@ return {
 					},
 				},
 			},
-			setup = {
-				yamlls = function()
-					-- Neovim < 0.10 does not have dynamic registration for formatting
-					if vim.fn.has("nvim-0.10") == 0 then
-						LazyVim.lsp.on_attach(function(client, _)
-							client.server_capabilities.documentFormattingProvider = true
-						end, "yamlls")
-					end
-				end,
+		},
+	},
+
+	{
+		"saghen/blink.cmp",
+		opts = {
+			sources = {
+				per_filetype = {
+					yaml = { "lsp", "path", "buffer" },
+					yml = { "lsp", "path", "buffer" },
+				},
+				providers = {
+					buffer = {
+						opts = {
+							get_bufnrs = function()
+								if vim.bo.filetype == "yaml" or vim.bo.filetype == "yml" then
+									local bufs = {}
+									for _, win in ipairs(vim.api.nvim_list_wins()) do
+										bufs[vim.api.nvim_win_get_buf(win)] = true
+									end
+									return vim.tbl_keys(bufs)
+								end
+								return vim.api.nvim_list_bufs()
+							end,
+						},
+					},
+				},
+			},
+			completion = {
+				menu = {
+					draw = {
+						columns = {
+							{ "kind_icon" },
+							{ "label", "label_description", gap = 1 },
+							{ "source_name" },
+							{ "kind" },
+						},
+					},
+				},
 			},
 		},
+	},
+
+	{
+		"LazyVim/LazyVim",
+		opts = function(_, opts)
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "yaml", "yml" },
+				callback = setup_yaml_buffer,
+				group = vim.api.nvim_create_augroup("YAMLConfig", { clear = true }),
+			})
+			return opts
+		end,
 	},
 }
