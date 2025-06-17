@@ -132,7 +132,7 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 		config = function()
-			require("yaml-jumper").setup()
+			require("yaml-jumper").setup({ use_smart_parser = false })
 		end,
 		ft = { "yaml", "yml" },
 	},
