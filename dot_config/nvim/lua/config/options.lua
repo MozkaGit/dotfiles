@@ -1,4 +1,4 @@
-vim.opt.ignorecase = false
+vim.opt.ignorecase = true
 
 vim.opt.scrolloff = 8
 
