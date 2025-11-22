@@ -8,5 +8,7 @@ rust = "latest"     # needed for codesnap.nvim
 op = "latest"
 starship = "latest"
 lazygit = "latest"
+lazydocker = "latest"
 fd = "latest"
+fx = "latest"
 usage = "latest"
