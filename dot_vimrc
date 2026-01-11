@@ -1,87 +1,48 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                 Sample vimrc                                 "
-"                                                                              "
-"                                 Provided by:                                 "
-"                           LinuxTrainingAcademy.com                           "
-"                                                                              "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on
+colorscheme slate
 
-" Save 1,000 items in history
-set history=1000
+hi SpellBad term=reverse ctermbg=red
 
-" Show the line and column number of the cursor position
-set ruler
+set number relativenumber
+set cursorline
+set showcmd   "shows current command in the statusline
+set exrc      "read <cwd>/.vimrc
+set ttyfast   "more characters will be sent to the screen for redrawing
+set wildmenu  "a better menu in command mode
+set wildmode=longest:full,full
+set colorcolumn=81
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
-" Display the incomplete commands in the bottom right-hand side of your screen.  
-set showcmd
+set hlsearch  "highlights search results
+set ignorecase smartcase
+set shortmess-=S
+hi Search ctermbg=DarkGray
+hi Search ctermfg=Red
+hi QuickFixLine term=reverse ctermbg=52  "change QuickFix selected line color
 
-" Display completion matches on your status line
-set wildmenu
+set laststatus=2
+set statusline=%f\:%l\:%c\ \[%L\]
 
-" Show a few lines of context around the cursor
-set scrolloff=5
-
-" Highlight search matches
-set nohlsearch
-
-" Enable incremental searching
-set incsearch
-
-" Ignore case when searching
-set ignorecase
-
-" Override the 'ignorecase' option if the search pattern contains upper case characters.
-set smartcase
-
-" Turn on line numbering
-set number
-
-" Turn on file backups
-set nobackup
-
-" Don't line wrap mid-word.
-set lbr
-
-" Copy the indentation from the current line.
-set autoindent
-
-" Enable smart autoindenting.
-set smartindent
-
-" Use spaces instead of tabs
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
-" Enable smart tabs
-set smarttab
+filetype plugin indent on
 
-" Make a tab equal to 4 spaces
-set shiftwidth=4
-set tabstop=4
+set runtimepath^=~/.fzf
+set runtimepath^=~/.vim/bundle/fzf.vim
 
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
 
-" Specifiy a color scheme.
-" colorscheme slate
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
 
-" Tell vim what background you are using
-" set bg=light
-" set bg=dark
-
-" Map Y to act like D and C, i.e. yank until EOL, rather than act like yy
-" map Y y$
-
-" Remap VIM 0 to first non-blank character
-" map 0 ^
-
-" Easily create HTML unorded lists.
-map <F2> i<ul><CR><Space><Space><li></li><CR><Esc>0i</ul><Esc>kcit
-map <F3> i<ul><CR><Space><Space><li></li><CR><Esc>I</ul><Esc>kcit
-map <F4> <Esc>o<li></li><Esc>cit
-
-" change the mapleader from \ to ,
-" NOTE: This has to be set before <leader> is used.
-" let mapleader=","
-
-" Quickly save your file.
-map <leader>w :w!<cr>
-
-" For more options see ":help option-list" and ":options".
