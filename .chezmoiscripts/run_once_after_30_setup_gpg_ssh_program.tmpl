@@ -1,0 +1,8 @@
+#!/bin/bash
+{{- if (env "DEVPOD") }}
+git config --global gpg.ssh.program ssh-keygen
+{{- else }}
+echo "Skipping gpg program edit - not in DevPod environment"
+exit 0
+{{- end }}
+
