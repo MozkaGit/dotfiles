@@ -19,10 +19,4 @@ sudo apt-get install nushell -y
 # Installing Vim and TMUX
 sudo apt-get install vim tmux -y
 
-# Setup GPG SSH program to sign commit inside DevPod
-if env | grep -q -i devpod; then
-    git config --global gpg.ssh.program ssh-keygen
-fi
-
 exit 0
-
