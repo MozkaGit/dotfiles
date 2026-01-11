@@ -21,7 +21,7 @@ sudo apt-get install vim tmux -y
 
 # Setup GPG SSH program to sign commit inside DevPod
 if env | grep -q -i devpod; then
-    echo "Setting up GPG SSH program to ssh-keygen
+    echo "Setting up GPG SSH program to ssh-keygen"
     git config --global gpg.ssh.program ssh-keygen
 fi
 
