@@ -47,3 +47,9 @@ set -gx TERM xterm-256color
 if test -e ~/.1password/agent.sock
     set -gx SSH_AUTH_SOCK "~/.1password/agent.sock"
 end
+
+# Add persistent fix for DevPod's broken SSH signature wrapper (GitHub issue #1803)
+# DevPod re-adds gpg.ssh.program after setup, so remove it on every shell startup
+if env | grep -q -i devpod
+  git config --global gpg.ssh.program ssh-keygen
+end
