@@ -2,7 +2,7 @@
 bat = "latest"
 chezmoi = "latest"
 ripgrep = "latest"
-neovim = "0.11.1"
+neovim = "0.11.6"
 node = "latest"     # needed for some Neovim plugins
 #rust = "latest"     # needed for codesnap.nvim
 op = "latest"
